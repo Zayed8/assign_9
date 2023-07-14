@@ -1,15 +1,22 @@
 from mycalci import * #userdefined module
 import math as m #builtin module
-class Myerror(Exception):
-    pass
-class stringpassedError(Myerror):
-    def __init__(self):
-        super().__init__("Input passed is String! Plz enter a Integer type-->")
-class Operations(stringpassedError):
-    if Mycalci and m == "":
-            raise stringpassedError
+class WrongDataTypeError(Exception):
+    def _init_(self, *args):
+        super()._init_(*args)
+
+num1=None
+num2=None
+try:
+    num1=int(input("Enter num: "))
+    num2=int(input("Enter num: "))
+
+except ValueError:
     try:
-        print("Usertdefined Module-mycalci.py-> ")
+        if num1 or num2 ==None:
+            raise WrongDataTypeError("It is taking a Wrong datatype")
+    except WrongDataTypeError as s:
+        print(s.args[0])
+        print("******Usertdefined Module-mycalci.py****** ")
         obj = Mycalci.add(num1=4,num2=5)
         obj = Mycalci.sub(num1=4,num2=5)
         obj = Mycalci.mul(num1=4,num2=5)
@@ -17,7 +24,8 @@ class Operations(stringpassedError):
         obj = Mycalci.mod(num1=4,num2=5)
         obj = Mycalci.exp(num1=4,num2=5)
         obj = Mycalci.fdiv(num1=4,num2=5)
-        print("Inbuilt Module-math.py-> ")
+        print()
+        print("******Inbuilt Module-math.py****** ")
         print(m.ceil(5.1))
         print(m.floor(5.9))
         print(m.sin(2))
@@ -26,8 +34,6 @@ class Operations(stringpassedError):
         print(2**4)  
         print(m.pow(2,2)) 
         print(m.factorial(5))
-    except stringpassedError:
-        print("String value Entered....!")
     except Exception:
          print("Exception has been raised Plz check the userinput again!")
     finally:
